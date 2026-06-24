@@ -1,12 +1,19 @@
 import GetPlayer from "./createPlayer";
 import { PlayerContext } from "./context/playerContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Exploring from "./explore";
 import GetRest from "./rest";
+import Messages from "./message";
+import type { GameMode } from "./explore";
+import type { Message } from "./message";
+
+
 
 function Game() {
     const { player} = useContext(PlayerContext);
-    
+   const [message, setMessage] = useState<Message | null>(null);
+  const [mode, setMode] = useState<GameMode>('idle');
+
     return (
         <div>
             
@@ -26,10 +33,13 @@ function Game() {
             <p>Reputation: {player.reputationCategory.charAt(0).toUpperCase() + player.reputationCategory.slice(1)}</p>
             <p>Luck: {player.luckCategory.charAt(0).toUpperCase() + player.luckCategory.slice(1)}</p>
 
-            <Exploring />
+            <Exploring mode={mode} setMessage={setMessage} setMode={setMode} />
+
+
+
 
             <GetRest />
-            
+            <Messages  message={message}/>
             </>
            }
           

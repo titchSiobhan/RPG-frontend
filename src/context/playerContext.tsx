@@ -28,6 +28,7 @@ import { createContext, useState } from "react";
 type PlayerContextType = {
     player: Player | null
     setPlayer: (p: Player | null) => void
+    
 }
 export const PlayerContext = createContext<PlayerContextType>({
     player: null,
@@ -41,3 +42,4 @@ export function PlayerProvider({children}: { children: React.ReactNode }) {
         </PlayerContext.Provider>
     )
 }
+
