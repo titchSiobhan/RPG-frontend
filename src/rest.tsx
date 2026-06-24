@@ -1,8 +1,9 @@
 import { PlayerContext } from './context/playerContext';
 import { useContext } from 'react';
 const API_URL = import.meta.env.VITE_API_URL;
+import type {ModeProps} from './explore';
 
-function GetRest() {
+function GetRest({setMessage}: ModeProps) {
 	const { player, setPlayer } = useContext(PlayerContext);
 
 	async function restButton() {
@@ -15,13 +16,11 @@ function GetRest() {
 		});
 		const data = await response.json();
 		console.log(data.player.luck);
-		setPlayer((prev) => ({
-			...prev,
-			luck: data.player.luck,
-			luckCategory: data.player.luckCategory,
-			energy: data.player.energy,
-			health: data.player.health,
-		}));
+        if (!player ) return 
+		setPlayer(data.player);
+        setMessage(prev => ({
+            message: [...(prev?.message ?? []), data.message]
+        }))
 	}
 	return (
 		<>

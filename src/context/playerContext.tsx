@@ -27,7 +27,8 @@ import { createContext, useState } from "react";
 }
 type PlayerContextType = {
     player: Player | null
-    setPlayer: (p: Player | null) => void
+    setPlayer: React.Dispatch<React.SetStateAction<Player | null>>;
+
     
 }
 export const PlayerContext = createContext<PlayerContextType>({

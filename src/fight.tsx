@@ -10,6 +10,7 @@ function Fight({ setMode, setMessage }: ModeProps) {
 	const [enemy, setEnemy] = useState<Enemy | null>(null);
 	const [enemyHealth, setEnemyHealth] = useState(0);
 	const [isFighting, setIsFighting] = useState<isFight>(false);
+	const { player } = useContext(PlayerContext);
 
 	type Enemy = {
 		name: string;
@@ -30,52 +31,51 @@ function Fight({ setMode, setMessage }: ModeProps) {
 		});
 		const data = await response.json();
 		console.log(`start fight ${data.enemy}`);
-        setEnemy(data.currentEnemy);
-    setEnemyHealth(data.currentEnemy.health);
-    setPlayer(data.player);
-    setIsFighting(true);
+		setEnemy(data.currentEnemy);
+		setEnemyHealth(data.currentEnemy.health);
+		setPlayer(data.player);
+		setIsFighting(true);
 	}
 
 	async function attack() {
-                try {
-                const response = await fetch(`${API_URL}fight/attack`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
-                const data = await response.json();
-                console.log(data);
-                setEnemyHealth(data.enemy.health);
-                
-                if (data.enemy.health === 0) {
-                    console.log('he ded', data.player);
+		try {
+			const response = await fetch(`${API_URL}fight/attack`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				credentials: 'include',
+			});
+			const data = await response.json();
+			console.log(data);
+			setEnemyHealth(data.enemy.health);
 
-                    setPlayer(data.player);
-                    setIsFighting(false);
-                    
-                    
-                    setMessage((prev) => ({
-                        message: [
-                            ...(prev?.message ?? []),
-                            `You defeated ${data.enemy.name} the ${data.enemy.type.species}`,
-                        ],
-                    }));
+			if (data.enemy.health === 0) {
+				console.log('he ded', data.player);
 
-                    setTimeout(() => {
-                        setMode('idle');
-                    }, 1000)
-                    return
-                }
-                enemyAttack();
-                 if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Server Error: ${response.status} - ${errorText}`);
-    }
-            } catch (error) {
-                console.error(error);
-            }
+				setPlayer(data.player);
+				setIsFighting(false);
+
+				setMessage((prev) => ({
+					message: [
+						...(prev?.message ?? []),
+						`You defeated ${data.enemy.name} the ${data.enemy.type.species}`,
+					],
+				}));
+
+				setTimeout(() => {
+					setMode('idle');
+				}, 1000);
+				return;
+			}
+			enemyAttack();
+			if (!response.ok) {
+				const errorText = await response.text();
+				throw new Error(`Server Error: ${response.status} - ${errorText}`);
+			}
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	async function enemyAttack() {
@@ -89,34 +89,33 @@ function Fight({ setMode, setMessage }: ModeProps) {
 		const data = await response.json();
 		console.log(data);
 		setPlayer(data.player);
-         if (data.player.health <= 1) {
-        setIsFighting(false);
+		if (data.player.health <= 1) {
+			setMessage((prev) => ({
+				message: [...(prev?.message ?? []), 'You were defeated…'],
+			}));
 
-        setMessage(prev => ({
-            message: [...(prev?.message ?? []), "You were defeated…"]
-        }));
-
-        setTimeout(() => setMode("idle"), 1500);
-        return;
-    }
+			setTimeout(() => (setMode('idle'), setIsFighting(false)), 1500);
+			return;
+		}
 	}
-
+	if (!player) return;
 	return (
-		<>
+		<div className="fight">
 			{isFighting === false && (
 				<button onClick={() => startFight()}>Start Fight</button>
 			)}
 			{enemy && enemyHealth > 0 && (
-				<>
+				<>{player.health > 1 && (
+						<button onClick={() => attack()}>Attack</button>
+					)}
 					<p>
 						{enemy.name} the {enemy.type.species}
 					</p>
-					<p>{enemyHealth}</p>
-
-					<button onClick={() => attack()}>Attack</button>
+					<p>Enemy Health: {enemyHealth}</p>
+					
 				</>
 			)}
-		</>
+		</div>
 	);
 }
 

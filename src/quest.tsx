@@ -113,9 +113,11 @@ function Quests({ setMode, setMessage }: ModeProps) {
 		<>
 			{!outcome && (
 				<>
-					<p>{quests?.description}</p>
+				<div className="btn">
 					<button onClick={acceptQuest}>Accept</button>
 					<button onClick={declineQuest}>Decline</button>
+					</div>
+					<p>{quests?.description}</p>
 				</>
 			)}
 			{outcome && <p>{outcome.text}</p>}

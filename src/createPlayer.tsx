@@ -30,8 +30,8 @@ async function createPlayer(event: React.FormEvent<HTMLFormElement>) {
 
 return (
     <>
-    <form onSubmit={createPlayer}>
-        <label>Name:</label>
+    <form onSubmit={createPlayer} className="create-player-form">
+        <h1 className="create-player">Name</h1>
         <input type="text" name="name" id="name" onChange={(event) => setName(event.target.value)}/>
         <button type="submit">Submit</button>
     </form>

@@ -1,4 +1,4 @@
-
+import {useEffect, useRef, useState} from 'react'
 export type Message = {
     message: string[]
 }
@@ -9,12 +9,39 @@ type MessageProps = {
 
 
 function Messages({message}: MessageProps) {
-   console.log(message, 'messages')
-return (
+   const messagesRef = useRef<HTMLDivElement>(null);
+ const [ toggle, setToggle ] = useState(false)
+
+    useEffect(() => {
+        if (messagesRef.current) {
+           messagesRef.current.scrollTo({
+    top: messagesRef.current.scrollHeight,
+    behavior: "smooth"
+});
+
+        }
+    }, [message]);
+
+    function toggleMessage() {
+		setToggle(prev => !prev)
+	}
+ return (
     <>
-    {message?.message?.length ? message.message.map((m, i) => (<p key={i}>{m}</p>)) : null}
-    </>
-)
+    <div className="scroll" onClick={toggleMessage}>
+								<img src="./ancient-scroll.svg" alt="scroll" />
+							</div>
+   
+        <div className={toggle ? 'messages show' : 'messages'} ref={messagesRef}>
+            {message?.message?.length
+                ? message.message.map((m, i) => <p key={i}>{m}</p>)
+                : null}
+        </div>
+        
+        </>
+    );
+   
+
+
 }
 
 
