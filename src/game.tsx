@@ -6,6 +6,7 @@ import GetRest from './rest';
 import Messages from './message';
 import type { GameMode } from './explore';
 import type { Message } from './message';
+import Settings from './setting';
 
 function Game() {
 	const { player } = useContext(PlayerContext);
@@ -20,7 +21,9 @@ function Game() {
 			{!player && <GetPlayer />}
 			{player && (
 				<>
+<Settings />
                 <div className="game-control">
+					
 					<div className="player-stats">
                         <h1>Questage</h1>
 						<h2>{player.name}</h2>

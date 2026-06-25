@@ -6,12 +6,11 @@ import type { isFight } from './explore';
 
 import type { ModeProps } from './explore';
 function Fight({ setMode, setMessage }: ModeProps) {
-	const { setPlayer } = useContext(PlayerContext);
+	const {  setPlayer } = useContext(PlayerContext);
 	const [enemy, setEnemy] = useState<Enemy | null>(null);
 	const [enemyHealth, setEnemyHealth] = useState(0);
 	const [isFighting, setIsFighting] = useState<isFight>(false);
-	const { player } = useContext(PlayerContext);
-
+	
 	type Enemy = {
 		name: string;
 		type: any;
@@ -68,11 +67,9 @@ function Fight({ setMode, setMessage }: ModeProps) {
 				}, 1000);
 				return;
 			}
+			
 			enemyAttack();
-			if (!response.ok) {
-				const errorText = await response.text();
-				throw new Error(`Server Error: ${response.status} - ${errorText}`);
-			}
+			
 		} catch (error) {
 			console.error(error);
 		}
@@ -94,20 +91,20 @@ function Fight({ setMode, setMessage }: ModeProps) {
 				message: [...(prev?.message ?? []), 'You were defeated…'],
 			}));
 
-			setTimeout(() => (setMode('idle'), setIsFighting(false)), 1500);
+			(setMode('idle'), setIsFighting(false));
 			return;
 		}
 	}
-	if (!player) return;
+	
 	return (
 		<div className="fight">
-			{isFighting === false && (
+			{isFighting === false  && (
 				<button onClick={() => startFight()}>Start Fight</button>
 			)}
 			{enemy && enemyHealth > 0 && (
-				<>{player.health > 1 && (
+				<>
 						<button onClick={() => attack()}>Attack</button>
-					)}
+					
 					<p>
 						{enemy.name} the {enemy.type.species}
 					</p>

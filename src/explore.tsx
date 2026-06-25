@@ -2,9 +2,10 @@ import { PlayerContext } from './context/playerContext';
 import { useContext} from 'react';
 import Fight from './fight';
 import Quests from './quest';
-   export type GameMode = 'idle' | 'quest' | 'fight';
+   export type GameMode = 'idle' | 'quest' | 'fight' | 'event';
    export type isFight = boolean;
    import type { Message } from './message';
+   import Events from './event';
   
 
    export type ModeProps = {
@@ -17,7 +18,7 @@ function Exploring({ mode, setMessage, setMode }: ModeProps) {
 	const { player, setPlayer } = useContext(PlayerContext);
 
 
-	const exploreChoice = ['quest', 'fight'] as const;
+	const exploreChoice = ['quest', 'fight', 'event'] as const;
 	
 	console.log(mode, 'mode');
 	function getRandomExplore() {
@@ -55,6 +56,7 @@ function Exploring({ mode, setMessage, setMode }: ModeProps) {
 
 			{mode === 'quest' && <Quests mode={mode} setMode={setMode} setMessage={setMessage}/>}
 			{mode === 'fight' &&  <Fight mode={mode} setMode={setMode} setMessage={setMessage} />}
+			{mode === 'event' &&  <Events mode={mode} setMode={setMode} setMessage={setMessage} />}
 		</div>
 	);
 }
