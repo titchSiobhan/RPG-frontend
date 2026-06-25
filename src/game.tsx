@@ -1,6 +1,6 @@
 import GetPlayer from './createPlayer';
 import { PlayerContext } from './context/playerContext';
-import { useContext, useState, type SetStateAction,  } from 'react';
+import { useContext, useState  } from 'react';
 import Exploring from './explore';
 import GetRest from './rest';
 import Messages from './message';
@@ -48,9 +48,7 @@ function Game() {
 						<GetRest
 							setMessage={setMessage}
 							mode={'idle'}
-							setMode={function (value: SetStateAction<GameMode>): void {
-								throw new Error('Function not implemented.');
-							}}
+							setMode={setMode}
 						/>)}
                         <Exploring mode={mode} setMessage={setMessage} setMode={setMode} />
 					</div>

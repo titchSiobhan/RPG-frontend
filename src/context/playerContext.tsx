@@ -1,4 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+
+const API_URL = import.meta.env.VITE_API_URL
+import setPlayer from "../createPlayer"
 
 
 
@@ -37,6 +40,19 @@ export const PlayerContext = createContext<PlayerContextType>({
 })
 export function PlayerProvider({children}: { children: React.ReactNode }) {
     const [player, setPlayer] = useState<Player | null>(null)
+   useEffect(() => {
+    async function loadPlayerFromBackend() {
+      try {
+        const res = await fetch(`${API_URL}player/`);
+        const data = await res.json();
+        setPlayer(data);
+      } catch (err) {
+        console.error("Failed to load player", err);
+      }
+    }
+
+    loadPlayerFromBackend();
+  }, []);
     return (
         <PlayerContext.Provider value={{player, setPlayer}}>
             {children}
