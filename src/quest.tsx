@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 import type { ModeProps } from './explore';
 
-function Quests({ setMode, setMessage }: ModeProps) {
+function Quests({ setMode, setMessage, setMiniMessage }: ModeProps) {
 	
 	type Quest = {
 		questID: number;
@@ -75,7 +75,7 @@ function Quests({ setMode, setMessage }: ModeProps) {
         setMessage(prev => ({
             message: [...(prev?.message ?? []), data.outcome.text]
         }))
-        
+        setMiniMessage( {messages: [data.outcome.text]})
         setPlayer(data.player)
 		setMode("idle");
 
@@ -101,6 +101,7 @@ function Quests({ setMode, setMessage }: ModeProps) {
 		});
 		const data = await response.json();
 		console.log(data);
+		setMiniMessage( {messages: ["You've declined the quest"]})
        setPlayer(data.player)
         setMode("idle");
 	}
@@ -117,7 +118,7 @@ function Quests({ setMode, setMessage }: ModeProps) {
 					<button onClick={acceptQuest}>Accept</button>
 					<button onClick={declineQuest}>Decline</button>
 					</div>
-					<p>{quests?.description}</p>
+					<p className="quest-description">{quests?.description}</p>
 				</>
 			)}
 			{outcome && <p>{outcome.text}</p>}

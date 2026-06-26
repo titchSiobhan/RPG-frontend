@@ -5,12 +5,17 @@ import Exploring from './explore';
 import GetRest from './rest';
 import Messages from './message';
 import type { GameMode } from './explore';
-import type { Message } from './message';
+import type { Message } from './message'
+import type { MiniMessage } from './miniMessage'
 import Settings from './setting';
+import MiniMessages from './miniMessage';
+
+
 
 function Game() {
 	const { player } = useContext(PlayerContext);
 	const [message, setMessage] = useState<Message | null>(null);
+	const [miniMessage, setMiniMessage] = useState<MiniMessage | null>(null);
 	const [mode, setMode] = useState<GameMode>('idle');
    
 	
@@ -43,7 +48,7 @@ function Game() {
 								player.luckCategory.slice(1)}
 						</p>
 					</div>
-
+								
 					<div className="buttons">
 						
                                 { mode === 'idle' && (
@@ -52,9 +57,11 @@ function Game() {
 							setMessage={setMessage}
 							mode={'idle'}
 							setMode={setMode}
+							setMiniMessage={setMiniMessage}
 						/>)}
-                        <Exploring mode={mode} setMessage={setMessage} setMode={setMode} />
+                        <Exploring mode={mode} setMessage={setMessage} setMode={setMode} setMiniMessage={setMiniMessage} />
 					</div>
+					<MiniMessages miniMessage={miniMessage } setMiniMessage={setMiniMessage}/>
                     </div>
 							
 

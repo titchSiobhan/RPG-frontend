@@ -3,7 +3,7 @@ import { useContext } from 'react';
 const API_URL = import.meta.env.VITE_API_URL;
 import type {ModeProps} from './explore';
 
-function GetRest({setMessage}: ModeProps) {
+function GetRest({setMiniMessage}: ModeProps) {
 	const { player, setPlayer } = useContext(PlayerContext);
 
 	async function restButton() {
@@ -18,9 +18,7 @@ function GetRest({setMessage}: ModeProps) {
 		console.log(data.player.luck);
         if (!player ) return 
 		setPlayer(data.player);
-        setMessage(prev => ({
-            message: [...(prev?.message ?? []), data.message]
-        }))
+       setMiniMessage( {messages: [data.message]})
 	}
 	return (
 		<>

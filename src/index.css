@@ -1,232 +1,265 @@
 * {
-  padding: 0;;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Inter";
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'metamorphous';
 }
 
 :root {
-  --colourOne: #EBEBDD;
-  --colourTwo: #42423E;
-  --colourThree: #707069;
-  --colourFour: #fff;
+	--colourOne: #ebebdd;
+	--colourTwo: #42423e;
+	--colourThree: #707069;
+	--colourFour: #fff;
 }
 
 @font-face {
-  font-family: "Metamorphous";
-  src: url("/src/assets/fonts/Metamorphous-Regular.woff2") format("woff2")
+	font-family: 'Metamorphous';
+	src: url('/src/assets/fonts/Metamorphous-Regular.woff2') format('woff2');
 }
 img {
-  height: 30px;
-  width: auto;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  display: none;
-  cursor: pointer;
+	height: 30px;
+	width: auto;
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	display: none;
+	cursor: pointer;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/src/assets/fonts/Inter_28pt-Regular.woff2") format("woff")
+	font-family: 'Inter';
+	src: url('/src/assets/fonts/Inter_28pt-Regular.woff2') format('woff');
 }
 
 body {
-  background-color: var(--colourOne);
-  color: var(--colourTwo);
+	background-color: var(--colourOne);
+	color: var(--colourTwo);
 }
 button {
-  background-color: var(--colourThree);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  color: var(--colourFour);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: var(--colourFour);
+	width: 110px;
+	height: 50px;
+	font-size: 1.3rem;
+	background-color: var(--colourTwo);
+	color: var(--colourFour);
+	transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+	background-color: var(--colourThree);
 }
 
 #root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
- 
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+.mini-messages {
+	display: flex;
+	flex-direction: column;
+	font-size: 1.1rem;
+	margin: 1.2rem;
+	font-weight: bold;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .create-player-form {
-  grid-column: 1/-1;
-   
-    display: flex;
-    flex-direction: column;
-    gap: 10px 0;
-    font-family: "Metamorphous";
-    font-size: 20px;
-    margin: 5rem 2rem auto 2rem;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+	grid-column: 1/-1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px 0;
+	font-size: 20px;
+	margin: 5rem 2rem auto 2rem;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
 }
 
-h1, h2 {
-  text-align: center;
-  font-family: "Metamorphous";
-  
+h1,
+h2 {
+	text-align: center;
 }
 
 h1 {
-  font-size: 2.8rem;
-  padding-bottom:1.3rem
+	font-size: 2.5rem;
+	padding-bottom: 1.3rem;
 }
 
 .player-stats {
-  grid-column: 1;
-  grid-row: 1/3;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-family: "Metamorphous";
-  font-size: 20px;
-  padding: 1rem;
-  margin: 1rem;
- 
+	grid-column: 1;
+	grid-row: 1/3;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 20px;
+	padding: 1rem;
+	margin: 1rem;
 }
-
-button {
-  width: 110px;
-  height: 50px;
-  font-family: "Metamorphous";
-  font-size: 1.3rem;
-  margin: 1rem;
+.player-stats p {
+	font-family: 'Inter';
 }
 
 .messages {
-  grid-column: 3 /-1;
-height: 100vh;
-  gap: 1rem;
-  overflow-y: auto;
-  border-left: 1px solid var(--colourTwo);
-  font-weight: bold;
-  font-size: 1.2rem;
+	grid-column: 3 /-1;
+	height: 100vh;
+	gap: 1rem;
+	overflow-y: auto;
+	border-left: 1px solid var(--colourTwo);
+	font-weight: bold;
+	font-size: 1.2rem;
 }
 
 .messages p {
-  font-family: "Metamorphous";
-  padding: 0.8rem 1rem;
+	padding: 0.8rem 1rem;
 }
 
-  .settings-image {
-    height: 50px;
-    grid-column: 1/-1;
-    top: 15px;
-    left: 15px;
-    display: block;
-    cursor: pointer;
-    z-index: 3;
-  }
+.settings-image {
+	height: 50px;
+	grid-column: 1/-1;
+	top: 15px;
+	left: 15px;
+	display: block;
+	cursor: pointer;
+	z-index: 3;
+}
 
-  .settings {
-    top: 10px;
-    left: -100vw;
-    position: fixed;
-    z-index: 2;
-    transition: left 0.3s ease-in-out;
-  }
+.settings {
+	top: 10px;
+	left: -100vw;
+	position: fixed;
+	z-index: 2;
+	transition: left 0.3s ease-in-out;
+}
 
-  .settings.show {
-    left: 70px;
-  }
+.settings.show {
+	left: 70px;
+}
 .btn {
-  display: flex;
-  width: 100%;
-  gap: 10px;
+	display: flex;
+	width: 100%;
+	gap: 10px;
+	justify-content: space-around;
+	margin: 1.4rem;
+}
+.quest-description {
+	display: flex;
+	width: 100%;
+	gap: 10px;
+	justify-content: space-around;
+	margin: 1.1rem;
 }
 .buttons {
- 
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  font-family: "Metamorphous";
-  font-size: 20px;
-  padding: 0;
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	flex-direction: row;
+	gap: 10px;
+
+	font-size: 20px;
+	padding: 0;
 }
 
 .game-control {
-  position: fixed;
-  width: 50%;
-  top: 60px;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-family: "Metamorphous";
-  font-size: 20px;
-padding: 1rem;
+	position: fixed;
+	width: 50%;
+	top: 40px;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+
+	font-size: 20px;
+	padding: 1rem;
 }
 
 .fight {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
- 
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .messages-scroll {
-  height: 10px;
-  width: 100%;
-  background-color: aliceblue;
+	height: 10px;
+	width: 100%;
+	background-color: aliceblue;
 }
 
 @media (max-width: 450px) {
-  #root {
-    display: flex;
-    flex-direction: column;
-  }
+	#root {
+		display: flex;
+		flex-direction: column;
+	}
 
-  img {
-    display: block;
-    z-index: 2;
-    background-color: var(--colourOne);
-  }
-  .messages{
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    left: -100%;
-    top: 0;
-    border: none;
-    z-index: 1;
-    background-color: var(--colourOne);
-   transition: left 0.5s ease-in-out;
-  }
+	img {
+		display: block;
+		z-index: 2;
+		background-color: var(--colourOne);
+	}
+	.messages {
+		position: fixed;
+		height: 100vh;
+		width: 100vw;
+		left: -100%;
+		top: 0;
+		border: none;
+		z-index: 1;
+		background-color: var(--colourOne);
+		transition: left 0.5s ease-in-out;
+	}
 
-  .settings-image {
-    left: 60px;
-    z-index: 3;
-    background-color: var(--colourOne);
-  }
+	.settings-image {
+		left: 60px;
+		z-index: 3;
+		background-color: var(--colourOne);
+	}
 
-  .settings.show{
-    left: 140px;
- }
-  
+	.settings.show {
+		left: 140px;
+	}
 
-  .messages.show {
-    left: 0;
-  }
-   .game-control {
-    position: fixed;
-    width: 100%;
-    top: 20px;
-    left: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-family: "Metamorphous";
-    font-size: 20px;
-  
-      padding: 1.5rem;
-  justify-content: center;
-  }
+	.messages.show {
+		left: 0;
+	}
+	.game-control {
+		position: fixed;
+		width: 100%;
+		top: 20px;
+		left: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 10px;
+		padding: 1.5rem;
+		justify-content: center;
+	}
+
+	.player-stats {
+		font-size: 1.1rem;
+	}
+	h1 {
+		font-size: 2rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+
+	button {
+		width: 100px;
+		height: 40px;
+		font-size: 1rem;
+		margin: 1rem;
+	}
+	.btn,
+	.quest-description {
+		margin: 0;
+	}
 }

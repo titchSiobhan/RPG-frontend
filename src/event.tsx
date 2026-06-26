@@ -26,6 +26,7 @@ type Event = {
             message: [...(prev?.message ?? []), data.message]
 
         }))
+       
         return
     }
     useEffect(() => {

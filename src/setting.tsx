@@ -22,7 +22,7 @@ function toggleSettings() {
 }
 return (
     <>
-    <img src="./public/settings.svg" alt="Settings" className="settings-image"  onClick={toggleSettings}/>
+    <img src="./settings.svg" alt="Settings" className="settings-image"  onClick={toggleSettings}/>
 
     <div  className={settingsToggle ? 'settings show' : 'settings'}>
         <button onClick={deletePlayer}>Delete Player</button>

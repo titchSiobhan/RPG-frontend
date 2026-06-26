@@ -5,8 +5,8 @@ import { PlayerContext } from './context/playerContext';
 import type { isFight } from './explore';
 
 import type { ModeProps } from './explore';
-function Fight({ setMode, setMessage }: ModeProps) {
-	const {  setPlayer } = useContext(PlayerContext);
+function Fight({ setMode, setMessage, setMiniMessage}: ModeProps) {
+	const {   setPlayer } = useContext(PlayerContext);
 	const [enemy, setEnemy] = useState<Enemy | null>(null);
 	const [enemyHealth, setEnemyHealth] = useState(0);
 	const [isFighting, setIsFighting] = useState<isFight>(false);
@@ -53,7 +53,7 @@ function Fight({ setMode, setMessage }: ModeProps) {
 				console.log('he ded', data.player);
 
 				setPlayer(data.player);
-				setIsFighting(false);
+				
 
 				setMessage((prev) => ({
 					message: [
@@ -61,8 +61,11 @@ function Fight({ setMode, setMessage }: ModeProps) {
 						`You defeated ${data.enemy.name} the ${data.enemy.type.species}`,
 					],
 				}));
+				setMiniMessage( {messages: [`You defeated ${data.enemy.name} the ${data.enemy.type.species}`]} )
 
 				setTimeout(() => {
+
+				setIsFighting(false);
 					setMode('idle');
 				}, 1000);
 				return;
@@ -90,25 +93,35 @@ function Fight({ setMode, setMessage }: ModeProps) {
 			setMessage((prev) => ({
 				message: [...(prev?.message ?? []), 'You were defeated…'],
 			}));
-
-			(setMode('idle'), setIsFighting(false));
+			setMiniMessage( {messages: ['You were defeated…']} );
+			setTimeout(() => {
+				setMode('idle');
+			setIsFighting(false);
+			}, 1000);
+			
 			return;
 		}
 	}
 	
 	return (
 		<div className="fight">
+			
+				
+			
 			{isFighting === false  && (
 				<button onClick={() => startFight()}>Start Fight</button>
 			)}
+			
+
 			{enemy && enemyHealth > 0 && (
 				<>
+				
 						<button onClick={() => attack()}>Attack</button>
 					
 					<p>
 						{enemy.name} the {enemy.type.species}
 					</p>
-					<p>Enemy Health: {enemyHealth}</p>
+					<p>{enemy.name}'s Health: {enemyHealth}</p>
 					
 				</>
 			)}
