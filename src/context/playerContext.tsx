@@ -27,7 +27,12 @@ import { createContext, useState, useEffect } from "react";
     timesWon: number,
     questsCompleted: number,
     eventsCompleted: number,
-    achievements: number[]
+    achievements: number[],
+     equip: {
+    weapon: any | null,
+    shield: any | null,
+    armor: any | null
+},
 }
 type PlayerContextType = {
     player: Player | null
