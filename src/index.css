@@ -10,6 +10,11 @@
 	--colourTwo: #42423e;
 	--colourThree: #707069;
 	--colourFour: #fff;
+	--red: #710c0c;  
+}
+
+.event {
+	display: none;
 }
 
 @font-face {
@@ -42,7 +47,7 @@ button {
 	color: var(--colourFour);
 	width: 110px;
 	height: 50px;
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	background-color: var(--colourTwo);
 	color: var(--colourFour);
 	transition: all 0.3s ease-in-out;
@@ -69,6 +74,7 @@ button:hover {
 	align-content: center;
 	justify-content: center;
 	align-items: center;
+	padding-top: 1rem;
 }
 
 .create-player-form {
@@ -93,6 +99,117 @@ h1 {
 	font-size: 2.5rem;
 	padding-bottom: 1.3rem;
 }
+.shop-item {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	padding: 1rem;
+	
+	
+	padding: 1rem;
+}
+
+.shop-item p {
+	text-align: left;
+	width: 20%;
+}
+.shop, .achievements {
+	height: 100vh;
+	width: 100vw;
+	top: 0px;
+	left: -100vw;
+	position: fixed;
+	z-index: 2;
+	transition: left 0.6s ease-in-out;
+	background-color: var(--colourOne);
+	overflow-y: auto;
+}
+
+.achievement {
+	display: flex;
+	width: 100%;
+	padding: 1rem;
+
+}
+
+.achievement.uncompleted {
+opacity: 0.5;
+}
+
+.achievement.completed {
+opacity: 1;
+}
+
+
+.achievement p, .achievement h4 {
+	text-align: left;
+	padding: 0 2rem;
+	width: 50%;
+	display: flex;
+	
+}
+.shop-area {
+	padding-top: 70px;
+	background-color: var(--colourOne)
+}
+
+
+
+.shop-close, .inventory-close, .achievements-close {
+	z-index: 3;
+	width: 100px;
+	height: auto;
+	position: fixed;
+	top: 15px;
+	left: -100vw;
+	cursor: pointer;
+	transition: all 0.6s ease-in-out;
+	color: var(--red);
+}
+.shop-close.show, .inventory-close.show, .achievements-close.show {
+	left: 90%;
+}
+
+.mask {
+	background-color: var(--colourOne);
+	height: 70px;
+	width: 100vw;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+.shop.show, .achievements.show {
+	left: 0;
+}
+
+.inventory{
+	background-color: var(--colourOne);
+	height: 100vh;
+	width: 100vw;
+	top: 0px;
+	left: -100vw;
+	position: fixed;
+	z-index: 2;
+	transition: left 0.6s ease-in-out;
+}
+.inventory.show {
+	left: 0;
+}
+
+.inventory-area {
+	margin-top: 70px;
+	padding: 1rem;
+}
+
+.inventory-area p {
+	font-weight: bold;
+	font-size: 1.2rem;
+	padding: 0.5rem 0;
+}
+
+
 
 .player-stats {
 	grid-column: 1;
@@ -129,19 +246,35 @@ h1 {
 	left: 15px;
 	display: block;
 	cursor: pointer;
-	z-index: 3;
+	z-index: 2;
+}
+.achievements-image{
+	height: 50px;
+	grid-column: 1/-1;
+	top: 15px;
+	left: 70px;
+	display: block;
+	cursor: pointer;
+	z-index: 2;
 }
 
+.buy-button {
+	cursor: pointer;
+	color: var(--red)
+}
 .settings {
-	top: 10px;
+	top: 25px;
 	left: -100vw;
 	position: fixed;
 	z-index: 2;
 	transition: left 0.3s ease-in-out;
 }
 
+
 .settings.show {
-	left: 70px;
+	top: 25px;
+	left: 170px;
+	z-index: 2;
 }
 .btn {
 	display: flex;
@@ -163,6 +296,7 @@ h1 {
 	justify-content: space-around;
 	flex-direction: row;
 	gap: 10px;
+	flex-wrap: wrap;
 
 	font-size: 20px;
 	padding: 0;
@@ -180,11 +314,30 @@ h1 {
 	font-size: 20px;
 	padding: 1rem;
 }
+.loading-screen {
+  display: flex;
+  justify-content: center; 
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  gap: 10px;
+  align-items: center;
+  cursor:wait;
+  padding: 1rem;
+}
+  .loading-screen p {font-size: 2rem;
+}
+.loading-screen h1 {font-size: 3rem;
+}
 
 .fight {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	align-items: center;
+}
+.fight p {
+	padding: 1.5rem;
 }
 
 .messages-scroll {
@@ -218,12 +371,26 @@ h1 {
 
 	.settings-image {
 		left: 60px;
-		z-index: 3;
+		z-index: 2;
+		background-color: var(--colourOne);
+	}
+	.achievements-image {
+		left: 115px;
+		z-index: 2;
 		background-color: var(--colourOne);
 	}
 
 	.settings.show {
 		left: 140px;
+	}
+	
+	
+	.mini-messages {
+		padding: 0;
+	}
+
+	.fight p {
+		padding: 0.1rem;
 	}
 
 	.messages.show {
@@ -253,13 +420,17 @@ h1 {
 	}
 
 	button {
-		width: 100px;
-		height: 40px;
-		font-size: 1rem;
-		margin: 1rem;
+		width: 80px;
+		height: 30px;
+		font-size: 0.8rem;
+		margin: 0.5rem;
 	}
 	.btn,
 	.quest-description {
 		margin: 0;
 	}
+   .loading-screen p {font-size: 1rem;
+}
+.loading-screen h1 {font-size: 2rem;
+}
 }

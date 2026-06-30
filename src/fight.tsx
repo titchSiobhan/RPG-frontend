@@ -5,12 +5,12 @@ import { PlayerContext } from './context/playerContext';
 import type { isFight } from './explore';
 
 import type { ModeProps } from './explore';
-function Fight({ setMode, setMessage, setMiniMessage}: ModeProps) {
-	const {   setPlayer } = useContext(PlayerContext);
+function Fight({ setMode, setMessage, setMiniMessage }: ModeProps) {
+	const { setPlayer } = useContext(PlayerContext);
 	const [enemy, setEnemy] = useState<Enemy | null>(null);
 	const [enemyHealth, setEnemyHealth] = useState(0);
 	const [isFighting, setIsFighting] = useState<isFight>(false);
-	
+
 	type Enemy = {
 		name: string;
 		type: any;
@@ -32,7 +32,7 @@ function Fight({ setMode, setMessage, setMiniMessage}: ModeProps) {
 		console.log(`start fight ${data.enemy}`);
 		setEnemy(data.currentEnemy);
 		setEnemyHealth(data.currentEnemy.health);
-		setPlayer(data.player);
+		
 		setIsFighting(true);
 	}
 
@@ -53,7 +53,6 @@ function Fight({ setMode, setMessage, setMiniMessage}: ModeProps) {
 				console.log('he ded', data.player);
 
 				setPlayer(data.player);
-				
 
 				setMessage((prev) => ({
 					message: [
@@ -61,18 +60,20 @@ function Fight({ setMode, setMessage, setMiniMessage}: ModeProps) {
 						`You defeated ${data.enemy.name} the ${data.enemy.type.species}`,
 					],
 				}));
-				setMiniMessage( {messages: [`You defeated ${data.enemy.name} the ${data.enemy.type.species}`]} )
+				setMiniMessage({
+					messages: [
+						`You defeated ${data.enemy.name} the ${data.enemy.type.species}`,
+					],
+				});
 
 				setTimeout(() => {
-
-				setIsFighting(false);
+					setIsFighting(false);
 					setMode('idle');
 				}, 1000);
 				return;
 			}
-			
+
 			enemyAttack();
-			
 		} catch (error) {
 			console.error(error);
 		}
@@ -93,36 +94,35 @@ function Fight({ setMode, setMessage, setMiniMessage}: ModeProps) {
 			setMessage((prev) => ({
 				message: [...(prev?.message ?? []), 'You were defeated…'],
 			}));
-			setMiniMessage( {messages: ['You were defeated…']} );
+			setMiniMessage({ messages: ['You were defeated…'] });
 			setTimeout(() => {
 				setMode('idle');
-			setIsFighting(false);
+				setIsFighting(false);
 			}, 1000);
-			
+
 			return;
 		}
 	}
-	
+
 	return (
 		<div className="fight">
-			
-				
-			
-			{isFighting === false  && (
-				<button onClick={() => startFight()}>Start Fight</button>
+			{isFighting === false && (
+				<>
+					<button onClick={() => startFight()}>Start Fight</button>
+					<p>You have encountered an enemy</p>
+				</>
 			)}
-			
 
 			{enemy && enemyHealth > 0 && (
 				<>
-				
-						<button onClick={() => attack()}>Attack</button>
-					
+					<button onClick={() => attack()}>Attack</button>
+
 					<p>
 						{enemy.name} the {enemy.type.species}
 					</p>
-					<p>{enemy.name}'s Health: {enemyHealth}</p>
-					
+					<p>
+						{enemy.name}'s Health: {enemyHealth}
+					</p>
 				</>
 			)}
 		</div>

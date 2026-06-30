@@ -15,7 +15,8 @@ function GetRest({setMiniMessage}: ModeProps) {
 			credentials: 'include',
 		});
 		const data = await response.json();
-		console.log(data.player.luck);
+	
+		console.log(data.message);
         if (!player ) return 
 		setPlayer(data.player);
        setMiniMessage( {messages: [data.message]})

@@ -1,8 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 
-
-
-
     export type Player = {
     name: string,
     level: number,
@@ -24,7 +21,13 @@ import { createContext, useState, useEffect } from "react";
     strength: number,
     maxStrength: number,
     defense: number,
-    maxDefense: number
+    maxDefense: number,
+    lifeTimeCoins: number,
+    timesDefeated: number,
+    timesWon: number,
+    questsCompleted: number,
+    eventsCompleted: number,
+    achievements: number[]
 }
 type PlayerContextType = {
     player: Player | null

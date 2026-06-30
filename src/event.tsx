@@ -1,14 +1,18 @@
 const API_URL = import.meta.env.VITE_API_URL
 import type {ModeProps} from './explore';
-import {useState, useEffect} from 'react'
-function Events({setMessage, setMode}: ModeProps) {
-const [event, setEvent] = useState<Event | null>(null);
 
+import {useState, useEffect} from 'react'
+import { PlayerContext } from './context/playerContext';
+import { useContext } from 'react';
+
+
+function Events({setMessage, setMode, setMiniMessage  }: ModeProps) {
+const [event, setEvent] = useState<Event | null>(null);
+const {  setPlayer } = useContext(PlayerContext);
 type Event = {
    	eventID: number;
-		
 		message: string;
-		rewards: any[];
+		reward: any[];
 		punishment: any[];
 }
     async function getEvent() {
@@ -21,11 +25,17 @@ type Event = {
         });
         const data = await response.json();
         console.log(data);
-        setEvent(data);
+        setEvent(data.event);
         setMessage(prev => ({
             message: [...(prev?.message ?? []), data.message]
 
         }))
+        setMiniMessage( {messages: [data.event.message]})
+      setMessage((prev) => ({
+				message: [...(prev?.message ?? []), data.event.message],
+			}));
+        setPlayer(data.player);
+
        
         return
     }
@@ -36,14 +46,14 @@ type Event = {
    useEffect(() => {
     const timer = setTimeout(() => {
         setMode('idle');
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
 }, []);
 
  return (
     <>
-    <p>{event?.message} </p>
+    <p className='event'>{event?.message} </p>
 
     </>
  )
