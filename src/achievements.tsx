@@ -46,7 +46,7 @@ function Achievements() {
           <div
             key={achievement.id}
             className={
-              player.achievements.includes(achievement.id)
+              player.achievements?.includes(achievement.id)
                 ? "achievement completed"
                 : "achievement uncompleted"
             }

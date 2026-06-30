@@ -61,6 +61,6 @@ Runs on `http://localhost:5173`
 
 ## Screenshots
 
-![App Screenshot](https://github.com/titchSiobhan/rpg-frontend/blob/master/src/assets/screenshot_1.png)
-![App Screenshot](https://github.com/titchSiobhan/rpg-frontend/blob/master/src/assets/screenshot_2.png)
-![App Screenshot](https://github.com/titchSiobhan/rpg-frontend/blob/master/src/assets/screenshot_3.png)
+![App Screenshot](https://github.com/titchSiobhan/RPG-frontend/blob/main/src/assets/screenshots/screenshot_1.png)
+![App Screenshot](https://github.com/titchSiobhan/RPG-frontend/blob/main/src/assets/screenshots/screenshot_2.png)
+![App Screenshot](https://github.com/titchSiobhan/RPG-frontend/blob/main/src/assets/screenshots/screenshot_3.png)
