@@ -12,6 +12,7 @@ import MiniMessages from './miniMessage';
 import Shop from './shop';
 import Inventory from './inventory';
 import Achievements from './achievements';
+const API_URL = import.meta.env.VITE_API_URL
 
 
 
@@ -33,7 +34,7 @@ function Game() {
    }
    useEffect(() => {
   async function wakeServer() {
-    await callBackend("/api/ping"); 
+    await callBackend(`${API_URL}api/ping`); 
   }
 
   wakeServer();
